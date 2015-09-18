@@ -1,9 +1,17 @@
-describe('findAndReplace', function() {
-  it('prompts user if entered an empty string', function() {
-    expect(findAndReplace("")).to.eq("Please enter a sentence.");
+describe('Pizza', function() {
+  it('will return small', function() {
+      var testPizza = new Pizza("cheese", "Small", 1);
+      testPizza.pizzaTopping = "cheese";
+      testPizza.pizzaSize = "Small";
+      testPizza.pizzaQuantity = 1;
+      expect(testPizza.pizzaSize).to.equal("Small");
   });
 
-  it("replaces old word with new word", function() {
-    expect(findAndReplace("hello okay", "okay", "cool")).to.eql("hello cool");
+  it('will return quantity', function() {
+      var testPizza = new Pizza("cheese", "Small", 1);
+      testPizza.pizzaTopping = "cheese";
+      testPizza.pizzaSize = "Small";
+      testPizza.pizzaQuantity = 1;
+      expect(testPizza.pizzaQuantity).to.equal(1);
   });
 });

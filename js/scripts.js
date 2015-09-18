@@ -1,58 +1,44 @@
-$(function() {
-  $("#add-address").click(function() {
-    $("#new-addresses").append('<div class="new-address">' +
-                                 '<div class="form-group">' +
-                                   '<label for="new-street">Street</label>' +
-                                   '<input type="text" class="form-control new-street">' +
-                                 '</div>' +
-                                 '<div class="form-group">' +
-                                   '<label for="new-city">City</label>' +
-                                   '<input type="text" class="form-control new-city">' +
-                                 '</div>' +
-                                 '<div class="form-group">' +
-                                   '<label for="new-state">State</label>' +
-                                   '<input type="text" class="form-control new-state">' +
-                                 '</div>' +
-                               '</div>');
-  });
+function Pizza(pizzaTopping, pizzaSize, pizzaQuantity) {
+  this.pizzaTopping = pizzaTopping;
+  this.pizzaSize = pizzaSize;
+  this.pizzaQuantity = pizzaQuantity;
+}
 
-  $("form#new-contact").submit(function(event) {
+
+$(function() {
+  $("form#pizzas").submit(function(event) {
     event.preventDefault();
 
-    var inputtedFirstName = $("input#new-first-name").val();
-    var inputtedLastName = $("input#new-last-name").val();
+    var selectedTopping = $("select#pizzaTopping option:selected").val();
+    var selectedSize = $("select#pizzaSize option:selected").val();
+    var pizzaQuantity = parseInt($("select#pizzaQuantity option:selected").val());
+    var newPizza = new Pizza(selectedTopping, selectedSize, pizzaQuantity);
 
-    var newContact = { firstName: inputtedFirstName, lastName: inputtedLastName, addresses: [] };
+    var pizzaPrice = 8;
+    if (newPizza.pizzaTopping === ("mushroom") || newPizza.pizzaTopping === ("pepperoni") || newPizza.pizzaTopping === ("sausage")) {
+      pizzaPrice += 2;
+    }  else {
+      pizzaPrice;
+    }
 
-    $(".new-address").each(function() {
-      var inputtedStreet = $(this).find("input.new-street").val();
-      var inputtedCity = $(this).find("input.new-city").val();
-      var inputtedState = $(this).find("input.new-state").val();
+    if (newPizza.pizzaSize === ("Medium")) {
+      pizzaPrice +=2;
+    } else if (newPizza.pizzaSize === ("Large")) {
+        pizzaPrice += 4;
+      } else {
+        pizzaPrice;
+      }
 
-      var newAddress = { street: inputtedStreet, city: inputtedCity, state: inputtedState };
-      newContact.addresses.push(newAddress);
-    });
+    if (pizzaQuantity === 2) {
+      pizzaPrice *= 2;
+    } else if (pizzaQuantity === 3) {
+      pizzaPrice *= 3;
+    } else if (pizzaQuantity === 4) {
+      pizzaPrice *= 4;
+    } else {
+      pizzaPrice;
+    }
 
-
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.firstName + "</span></li>");
-
-    $(".contact").last().click(function() {
-      $("#show-contact").show();
-
-      $("#show-contact h2").text(newContact.firstName);
-      $(".first-name").text(newContact.firstName);
-      $(".last-name").text(newContact.lastName);
-
-      $("ul#addresses").text("");
-      newContact.addresses.forEach(function(address) {
-        $("ul#addresses").append("<li>" + address.street + ", " + address.city + ", " + address.state + "</li>");
-      });
-    });
-
-    $("input#new-first-name").val("");
-    $("input#new-last-name").val("");
-    $("input.new-street").val("");
-    $("input.new-city").val("");
-    $("input.new-state").val("");
+    $("#display-price").empty().append("<h2><span class='pizza-cost'>" + pizzaPrice + "</span> Dollars</h2>");
   });
 });

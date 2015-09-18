@@ -1,12 +1,25 @@
-#show-contact {
-  display: none;
+h2 {
+  text-align: center;
+  color: gray;
+  text-shadow: 2px 2px #555;
+}
+ul li {
+  list-style: none;
+  text-align: center;
 }
 
-.contact {
-  cursor: pointer;
-  color: #0088cc;
+.show-movie-info {
+  max-width: 47%;
+  float: center;
+  padding: 20px 20px 0 0;
+  margin: auto;
 }
 
-.contact:hover {
+ul li:hover {
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn {
+  text-align: center;
 }
